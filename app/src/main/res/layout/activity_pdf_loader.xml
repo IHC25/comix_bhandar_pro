@@ -25,5 +25,61 @@
         android:visibility="visible"
         />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:id="@+id/internetLost_layout"
+        android:padding="10dp"
+        android:weightSum="2"
+        >
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/internet_lost"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:lottie_rawRes="@raw/internet__lost"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            android:visibility="visible"
+            android:layout_weight="1"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:padding="10dp"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="No Internet Connection!"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Need Internet Conection to download Comic for the first time. After downloading the comic, Internet connection is not required. So, check Internet Connection and try again."
+                android:textSize="16sp"
+                android:gravity="center"
+                />
+            <Button
+                android:id="@+id/try_again_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Try Again"
+                android:textSize="16sp"
+                android:layout_gravity="center"
+                />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
 
 </RelativeLayout>
