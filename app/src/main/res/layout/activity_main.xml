@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="কমিক্স ভান্ডার"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        />
+
+    <!-- Comics List -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/top_shade"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="5dp"
+            >
+            <!-- Raw 1 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:padding="10dp"
+                android:layout_marginHorizontal="10dp"
+                >
+
+                <!-- Item 1 -->
+                <LinearLayout
+                    android:id="@+id/sovietTintinBtn"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:focusable="true"
+                    android:orientation="vertical"
+                    android:background="@drawable/bottom_curved"
+                    android:padding="5dp"
+                    android:layout_margin="3dp"
+                    android:clickable="true"
+                     >
+                    <!-- Comic Image-->
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="135dp"
+                        android:src="@drawable/soviet_deshe_tintin"
+                        android:scaleType="fitXY"
+                        android:padding="10dp"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="সোভিয়েত দেশে টিনটিন"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:textColor="#2E2222"
+                        android:maxLines="1"
+                        />
+                </LinearLayout>
+
+                <!-- Item 2 -->
+                <LinearLayout
+                    android:id="@+id/ascharjontuBtn"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="3dp"
+                    android:focusable="true"
+                    android:orientation="vertical"
+                    android:background="@drawable/bottom_curved"
+                    android:padding="5dp"
+                    android:clickable="true"
+                    >
+                    <!-- Comic Image-->
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="135dp"
+                        android:src="@drawable/ascharjontu"
+                        android:scaleType="fitXY"
+                        android:padding="10dp"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="আশ্চার্জন্তু"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:textColor="#2E2222"
+                        android:maxLines="1"
+                        />
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+            <!-- Raw 2 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:padding="10dp"
+                android:layout_marginHorizontal="10dp"
+                >
+
+                <!-- Item 1 -->
+                <LinearLayout
+                    android:id="@+id/danpiteKhaduBtn"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:focusable="true"
+                    android:orientation="vertical"
+                    android:background="@drawable/bottom_curved"
+                    android:padding="5dp"
+                    android:layout_margin="3dp"
+                    android:clickable="true"
+                    >
+                    <!-- Comic Image-->
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="135dp"
+                        android:src="@drawable/danpite_khadu"
+                        android:scaleType="fitXY"
+                        android:padding="10dp"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="ডানপিটে খাঁদু সমগ্র"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:textColor="#2E2222"
+                        android:maxLines="1"
+                        />
+                </LinearLayout>
+
+                <!-- Item 2 -->
+                <LinearLayout
+                    android:id="@+id/eksringaObhijanBtn"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="3dp"
+                    android:focusable="true"
+                    android:orientation="vertical"
+                    android:background="@drawable/bottom_curved"
+                    android:padding="5dp"
+                    android:clickable="true"
+                    >
+                    <!-- Comic Image-->
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="135dp"
+                        android:src="@drawable/eksringa_obhijan"
+                        android:scaleType="fitXY"
+                        android:padding="10dp"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="একশৃঙ্গ অভিযান"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:textColor="#2E2222"
+                        android:maxLines="1"
+                        />
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+            <!-- Raw 3 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:padding="10dp"
+                android:layout_marginHorizontal="10dp"
+                >
+
+                <!-- Item 1 -->
+                <LinearLayout
+                    android:id="@+id/moiNiyeHoiChoiBtn"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:focusable="true"
+                    android:orientation="vertical"
+                    android:background="@drawable/bottom_curved"
+                    android:padding="5dp"
+                    android:layout_margin="3dp"
+                    android:clickable="true"
+                    >
+                    <!-- Comic Image-->
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="135dp"
+                        android:src="@drawable/moi_niye_hoi_choi"
+                        android:scaleType="fitXY"
+                        android:padding="10dp"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="মই নিয়ে হৈচৈ"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:textColor="#2E2222"
+                        android:maxLines="1"
+                        />
+                </LinearLayout>
+
+                <!-- Item 2 -->
+                <LinearLayout
+                    android:id="@+id/bappaRayBadamiChairBtn"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="3dp"
+                    android:focusable="true"
+                    android:orientation="vertical"
+                    android:background="@drawable/bottom_curved"
+                    android:padding="5dp"
+                    android:clickable="true"
+                    >
+                    <!-- Comic Image-->
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="135dp"
+                        android:src="@drawable/bappa_ray_badami_chair"
+                        android:scaleType="fitXY"
+                        android:padding="10dp"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="রাপ্পা রায় ও বাদামি চেয়ার"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:textColor="#2E2222"
+                        android:maxLines="1"
+                        />
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>
