@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:padding="10dp"
+    android:background="#FFFFFF"
+    android:orientation="vertical"
+    >
+
+
+    <!-- Item -->
+    <LinearLayout
+        android:id="@+id/layComicBtn"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/bottom_curved"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="vertical"
+        android:padding="5dp"
+        >
+        <!-- Comic Image-->
+        <ImageView
+            android:id="@+id/comicCover"
+            android:layout_width="match_parent"
+            android:layout_height="135dp"
+            android:padding="10dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/soviet_deshe_tintin"
+            />
+
+        <TextView
+            android:id="@+id/comicTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:maxLines="2"
+            android:text="সোভিয়েত দেশে টিনটিন"
+            android:textColor="#2E2222"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+</LinearLayout>
