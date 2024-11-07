@@ -21,6 +21,10 @@
 - **Framework**: Android SDK
 - **Libraries**: PDFView, Lottie Animations
 
+## Demo (Appetize)
+https://appetize.io/app/b_b6lwnvhpeyjn4xrlvxzacbqlkq
+
+
 ## Installation
 
 Clone the repository:
