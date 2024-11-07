@@ -2,6 +2,7 @@ package com.imran.comixbhandar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +11,9 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,7 +21,18 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 import com.github.barteksc.pdfviewer.PDFView;
+import com.squareup.picasso.Picasso;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,6 +40,7 @@ import java.util.HashMap;
 public class MainActivity extends AppCompatActivity {
 
     GridView gridView;
+    ProgressBar progressBar;
     ArrayList< HashMap<String,String> > comicCollections = new ArrayList<>();
     HashMap<String,String> comicData = new HashMap<>();
 
@@ -40,15 +55,12 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        //Assign Grid View
+        //Assign Variable
         gridView = findViewById(R.id.gridView);
+        progressBar = findViewById(R.id.progressBar);
 
-        //Create Comic Data
-        CreateComicData();
-
-        //Assign Adapter
-        MyAdapter adapter = new MyAdapter();
-        gridView.setAdapter(adapter);
+        //Load Comic Data from Server
+        LoadDataFromServer();
     }
 
     //=================================================================================================================//
@@ -88,8 +100,10 @@ public class MainActivity extends AppCompatActivity {
             String cover = hashMap.get("cover");
             String title = hashMap.get("title");
             String url = hashMap.get("url");
-            int resourceId = getResources().getIdentifier(cover.substring(1), "drawable", getPackageName());
-            comicCover.setImageResource(resourceId);
+            Picasso.get()
+                    .load(cover)
+                    .resize(150, 150)
+                    .into(comicCover);
             comicTitle.setText(title);
 
             //Comic Click Listener
@@ -105,44 +119,50 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    //Method to Insert Comic Data in the Array
-    private void CreateComicData() {
-        //Soviet Tintin
-        comicData = new HashMap<>();
-        comicData.put("cover", "@drawable/soviet_deshe_tintin");
-        comicData.put("title", "সোভিয়েত দেশে টিনটিন");
-        comicData.put("url", "https://www.dropbox.com/scl/fi/v73s63n3bkfvtyy6pgfdy/01.SOVIET-DESHE-TINTIN.pdf?rlkey=q0y933txnaz98xynldd7aowte&st=iq2088vw&dl=1");
-        comicCollections.add(comicData);
-        //Aschar Jontu
-        comicData = new HashMap<>();
-        comicData.put("cover", "@drawable/ascharjontu");
-        comicData.put("title", "আশ্চার্জন্তু");
-        comicData.put("url", "https://www.dropbox.com/scl/fi/i00j7ltqjtbx8ol3rpz33/ascharjontu-bengalipdfcomics.blogspot.in.pdf?rlkey=jlbsrigf7xs400nv58li948un&st=5w178sh9&dl=1");
-        comicCollections.add(comicData);
-        //Danpite Khadu
-        comicData = new HashMap<>();
-        comicData.put("cover", "@drawable/danpite_khadu");
-        comicData.put("title", "ডানপিটে খাঁদু সমগ্র");
-        comicData.put("url", "https://www.dropbox.com/scl/fi/uv4bf20346zazefctkdaw/Danpite-Khandu-Samagra-bengalipdfcomics.blogspot.in.pdf?rlkey=9q64ysbguyut6poh8okeuctsc&st=1yh8x587&dl=1");
-        comicCollections.add(comicData);
-        //eksringa obhijan
-        comicData = new HashMap<>();
-        comicData.put("cover", "@drawable/eksringa_obhijan");
-        comicData.put("title", "একশৃঙ্গ অভিযান");
-        comicData.put("url", "https://www.dropbox.com/scl/fi/xrkxbwkjd2frrrzbokang/eksringa-abhijaan-bengalipdfcomics.blogspot.in.pdf?rlkey=rsa8j1ahbqptayzly8rjuo15x&st=9s4s1heu&dl=1");
-        comicCollections.add(comicData);
-        //Moi Niye Hoi Choi
-        comicData = new HashMap<>();
-        comicData.put("cover", "@drawable/moi_niye_hoi_choi");
-        comicData.put("title", "মই নিয়ে হৈচৈ");
-        comicData.put("url","https://www.dropbox.com/scl/fi/gs0ppr6z0iecqoxblddwi/Moi-Niye-Hoi-Choi.pdf?rlkey=7d5vxvcedigd9q7wz7pd2jgny&st=8hekrg9n&dl=1");
-        comicCollections.add(comicData);
-        //Rappa Ray Badami Chair
-        comicData = new HashMap<>();
-        comicData.put("cover", "@drawable/bappa_ray_badami_chair");
-        comicData.put("title", "রাপ্পা রায় ও বাদামি চেয়ার");
-        comicData.put("url","https://www.dropbox.com/scl/fi/jjwpoq251hbx1d5mkwlfj/_-_-_-_.pdf?rlkey=uvz3a3yw1e3tq6rxd44ybe5r9&st=hd581mcf&dl=1");
-        comicCollections.add(comicData);
+    //Method to load Data from server
+    private void LoadDataFromServer() {
+        //server address
+        String url = "http://imranhchy.whf.bz/apps/comixbhangar.json";
+        RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
+        JsonArrayRequest arrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+
+                //Parse the response here
+                try {
+                    for(int x = 0; x < response.length(); x++){
+                        JSONObject object = response.getJSONObject(x);
+                        String cover = object.getString("cover");
+                        String title = object.getString("title");
+                        String url = object.getString("url");
+                        comicData = new HashMap<>();
+                        comicData.put("cover", cover);
+                        comicData.put("title", title);
+                        comicData.put("url", url);
+                        comicCollections.add(comicData);
+                    }
+                    //Assign Adapter
+                    MyAdapter adapter = new MyAdapter();
+                    gridView.setAdapter(adapter);
+                    progressBar.setVisibility(View.GONE);
+                    gridView.setVisibility(View.VISIBLE);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                Toast.makeText(MainActivity.this,"Server Error: Try Again Later",Toast.LENGTH_LONG).show();
+                Log.d("serverError", "onErrorResponse: "+error.getMessage());
+            }
+        });
+
+        //Add the request to the RequestQueue
+        requestQueue.add(arrayRequest);
 
     }
 }

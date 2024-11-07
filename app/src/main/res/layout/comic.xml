@@ -27,7 +27,7 @@
             android:layout_height="135dp"
             android:padding="10dp"
             android:scaleType="fitXY"
-            android:src="@drawable/soviet_deshe_tintin"
+            android:src="@mipmap/ic_launcher"
             />
 
         <TextView
